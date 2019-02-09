@@ -1,0 +1,213 @@
+<div class="container">
+
+      <div class="p-grid">
+        <div class="p-col-2"></div>
+
+        <div class="p-col-8">
+          <h3>Zoznam zamestnancov</h3>
+        </div>
+
+        <div class="p-col-2"></div>
+
+      </div>
+
+      <div class="p-grid text">
+        <div class="p-col-4"></div>
+
+        <div class="p-col-4">
+
+        <div *ngFor="let zamestnanec of zamestnanci">
+            <div class="p-grid">
+              <div class="p-col-2"></div>
+              <div class="p-col-4">
+                {{zamestnanec.name}}
+              </div>
+              <div class="p-col-2">
+                <p-button label="Upravit" (click)="showEditDialog(zamestnanec)"></p-button>
+              </div>
+              <div class="p-col-2">
+                <p-button label="X" (click)="showDeleteDialog(zamestnanec)"></p-button>
+              </div>
+              <div class="p-col-2"></div>
+            </div>
+        </div>
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-8">
+            <p-button label="Pridat" (click)="showNewDialog()"></p-button>
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+        <div class="p-col-4"></div>
+
+        </div>
+      </div>
+
+
+      <!-- Edit dialog -->
+      <p-dialog id="editDialog" [contentStyle]="{'height':'600px'}" [(visible)]="displayEditDialog"
+                [width]="1000" [closable]="true" [modal]="true" draggable="false">
+        <p-header>
+            Upravit pravidla zamestnanca: {{zamestnanecToEdit.name}}
+        </p-header>
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">
+            Meno:
+          </div>
+          <div class="p-col-6">
+            <input type="text" pInputText [placeholder]="zamestnanecToEdit.name" [(ngModel)]="nameEditEmployee">
+          </div>
+          <div class="p-col-2"></div>
+
+        </div>
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-8">
+            Zakazany Partnery:
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+
+        <div *ngFor="let zamestnanec of zamestnanci">
+          <div class="p-grid" *ngIf="!(zamestnanec.name == zamestnanecToEdit.name)">
+            <div class="p-col-4"></div>
+            <div class="p-col-2">
+              {{zamestnanec.name}}
+            </div>
+            <div class="p-col-2">
+              <p-checkbox name="groupEditEmployee" [value]="zamestnanec.name" [(ngModel)]="selectedEditEmployeeException"></p-checkbox>
+            </div>
+            <div class="p-col-4"></div>
+          </div>
+        </div>
+
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">Zakazane dni: </div>
+          <div class="p-col-6">
+            PO
+            <p-checkbox name="groupeditdays" value="PO" [(ngModel)]="editExceptionDays"></p-checkbox>
+            UT
+            <p-checkbox name="groupeditdays" value="UT" [(ngModel)]="editExceptionDays"></p-checkbox>
+            STR
+            <p-checkbox name="groupeditdays" value="STR" [(ngModel)]="editExceptionDays"></p-checkbox>
+            ŠTV
+            <p-checkbox name="groupeditdays" value="STV" [(ngModel)]="editExceptionDays"></p-checkbox>
+            PIA
+            <p-checkbox name="groupeditdays" value="PIA" [(ngModel)]="editExceptionDays"></p-checkbox>
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">Dlhodobo PN </div>
+          <div class="p-col-6">
+
+            <p-checkbox [(ngModel)]="editDlhodoboPn" binary="true"></p-checkbox>
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+        <p-footer>
+          <p-button label="Upravit" (click)="editEmployee()"></p-button>
+        </p-footer>
+      </p-dialog>
+
+
+      <!-- New dialog -->
+      <p-dialog id="newDialog" [contentStyle]="{'height':'600px'}" [(visible)]="displayNewDialog"
+                [width]="1000" [closable]="true" [modal]="true" draggable="false">
+        <p-header>
+            Pridat zamestnanca
+        </p-header>
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">
+            Meno:
+          </div>
+          <div class="p-col-6">
+            <input type="text" pInputText placeholder="Meno" [(ngModel)]="nameNewEmployee">
+          </div>
+          <div class="p-col-2"></div>
+
+        </div>
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">
+            Zakazany Partnery:
+          </div>
+          <div class="p-col-8"></div>
+        </div>
+
+
+        <div *ngFor="let zamestnanec of zamestnanci">
+          <div class="p-grid">
+            <div class="p-col-4"></div>
+            <div class="p-col-2">
+              {{zamestnanec.name}}
+            </div>
+            <div class="p-col-2">
+              <p-checkbox name="groupname" [value]="zamestnanec.name" [(ngModel)]="selectedEmployeeException"></p-checkbox>
+            </div>
+            <div class="p-col-4"></div>
+          </div>
+        </div>
+
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">Zakazane dni: </div>
+          <div class="p-col-6">
+            PO
+            <p-checkbox name="groupdays" value="PO" [(ngModel)]="exceptionDays"></p-checkbox>
+            UT
+            <p-checkbox name="groupdays" value="UT" [(ngModel)]="exceptionDays"></p-checkbox>
+            STR
+            <p-checkbox name="groupdays" value="STR" [(ngModel)]="exceptionDays"></p-checkbox>
+            ŠTV
+            <p-checkbox name="groupdays" value="STV" [(ngModel)]="exceptionDays"></p-checkbox>
+            PIA
+            <p-checkbox name="groupdays" value="PIA" [(ngModel)]="exceptionDays"></p-checkbox>
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+        <div class="p-grid">
+          <div class="p-col-2"></div>
+          <div class="p-col-2">Dlhodobo PN </div>
+          <div class="p-col-6">
+            <p-checkbox [(ngModel)]="dlhodoboPn" binary="true"></p-checkbox>
+          </div>
+          <div class="p-col-2"></div>
+        </div>
+
+        <p-footer>
+          <p-button label="Pridat" (click)="createNewEmployee()"></p-button>
+        </p-footer>
+
+      </p-dialog>
+
+
+      <!-- Delete dialog -->
+      <p-dialog id="deleteDialog" [contentStyle]="{'height':'600px'}" [(visible)]="displayDeleteDialog"
+                [width]="600" [closable]="true" [modal]="true" draggable="false">
+
+        <div class="p-grid p-col-12">
+          Naozaj si prajete odobrat zamestnanca {{zamestnanecToDelete.name}} ? Kliknutim na Ano vymazete zamestnanca natrvalo.
+        </div>
+        <p-footer>
+          <p-button label="Ano" (click)="deleteZamestnanec(zamestnanecToDelete)"></p-button>
+          <p-button label="Nie" (click)="closeDeleteDialog()"></p-button>
+        </p-footer>
+
+      </p-dialog>
+
+</div>
