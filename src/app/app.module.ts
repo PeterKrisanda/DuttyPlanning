@@ -19,6 +19,8 @@ import {DialogModule} from 'primeng/dialog';
 import {CheckboxModule} from 'primeng/checkbox';
 import {InputTextModule} from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
+import {DropdownModule} from 'primeng/dropdown';
+import {FullCalendarModule} from 'primeng/fullcalendar';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { FormsModule } from '@angular/forms';
     CheckboxModule,
     InputTextModule,
     FormsModule,
+    DropdownModule,
+    FullCalendarModule,
     BrowserAnimationsModule
   ],
   providers: [],

@@ -22,6 +22,8 @@
     "@angular/router": "^6.1.0",
     "core-js": "^2.5.4",
     "font-awesome": "^4.7.0",
+    "fullcalendar": "^4.0.0-alpha.2",
+    "ng-fullcalendar": "^1.7.1",
     "primeflex": "^1.0.0-rc.1",
     "primeicons": "^1.0.0",
     "primeng": "^7.0.5",

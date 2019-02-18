@@ -1,3 +1,81 @@
 <div class="container">
-  vytvorit-sluzby works!
+
+  <div class="p-grid">
+    <div class="p-col-2"></div>
+
+    <div class="p-col-8">
+      <h3>Vytvorit Sluzbu</h3>
+    </div>
+
+    <div class="p-col-2"></div>
+
+  </div>
+
+  <div class="p-grid">
+    <div class="p-col-2"></div>
+
+    <div class="p-col-8">
+
+
+        <div class="p-grid p-col-12">
+          <b>Vyberte mesiac pre vytvorenie sluzby</b>
+        </div>
+        <div class="p-grid p-col-12">
+          <p-dropdown [options]="mounths" [(ngModel)]="selectedMounth"
+          placeholder="Vyberte mesiac"></p-dropdown>
+        </div>
+
+
+        <div class="p-grid p-col-12">
+          <b>Vyberte sviatky v mesiaci {{selectedMounth}}</b>
+        </div>
+
+        <div *ngFor="let publicHoliday of publicHolidays">
+          <div class="p-grid p-col-12">
+            Sviatok {{publicHoliday.id}}:
+            <input type="text" id="holiday={{publicHoliday.id}}" pInputText placeholder="Zadajte den">
+          </div>
+        </div>
+        <div class="p-grid p-col-12">
+          <p-button icon="fa fa-plus" label="Pridat" (click)="addHolidayField()"></p-button>
+          <p-button icon="fa fa-plus" label="Odobrat" (click)="removeHolidayField()"></p-button>
+        </div>
+
+
+        <div class="p-grid p-col-12">
+          <b>Vyberte naplanovane dovolenky jednotlivych zamestnancov</b>
+        </div>
+
+        <div *ngFor="let vacation of vacations; index as in">
+          <div class="p-grid p-col-12">
+            {{in}}
+            <input type="text" id="vacationStart={{vacation.id}}" pInputText placeholder="Zadajte prvy den">
+            <div *ngIf="visibleMultiVacation[in]">
+              <input type="text" id="vacationEnd={{vacation.id}}" pInputText placeholder="Zadajte posledny den">
+            </div>
+            <div *ngIf="!visibleMultiVacation[in]">
+              <input type="text" disabled="true" id="vacationEnd={{vacation.id}}" pInputText placeholder="Zadajte posledny den">
+            </div>
+            <p-dropdown [options]="zamestnanci" optionLabel="name" [(ngModel)]="selectedZamestnanci[in]"
+            placeholder="Vyberte zamestnanca"></p-dropdown>
+
+            <p-button label="X" (click)="deleteSelectedZamestnanec(in)"></p-button>
+          </div>
+
+        </div>
+
+        <div class="p-grid p-col-12">
+          <p-button icon="fa fa-plus" label="Pridat den" (click)="addVacationField()"></p-button>
+          <p-button icon="fa fa-plus" label="Pridat viac dni" (click)="addVacationMultiField()"></p-button>
+        </div>
+
+        <p-button label="Save" (click)="save()"></p-button>
+
+
+    </div>
+
+    <div class="p-col-2"></div>
+
+  </div>
+
 </div>
