@@ -14,43 +14,34 @@ export class AktualneSluzbyComponent implements OnInit {
   ngOnInit() {
     this.events = [
             {
-                "title": "All Day Event",
-                "start": "2019-03-02"
+                "title": "Krisandova",
+                "start": "2019-03-01"
             },
             {
-                "title": "Long Event",
-                "start": "2016-01-07",
-                "end": "2016-01-10"
+                "title": "Partillova",
+                "start": "2019-03-07",
             },
             {
-                "title": "Repeating Event",
-                "start": "2016-01-09T16:00:00"
+                "title": "Klecova",
+                "start": "2019-03-13"
             },
             {
-                "title": "Repeating Event",
-                "start": "2016-01-16T16:00:00"
+                "title": "Inasova",
+                "start": "2019-03-18"
             },
             {
-                "title": "Conference",
-                "start": "2016-01-11",
-                "end": "2016-01-13"
+                "title": "Dugas",
+                "start": "2019-03-18"
             }
         ];
 
     this.options = {
         header: {
-            left: 'prev,next',
-            center: 'title',
-            right: 'myMonth',
-            weekends: false,
-            dayCount: 5
+            left: 'title',
+            center: '',
+            right: 'prev,next',
         },
-        views: {
-          myMonth: {
-            weekends: false,
-            dayCount: 5
-          }
-        }
+        weekends: false,
     };
 
 
